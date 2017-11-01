@@ -13,7 +13,9 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = frame.size.width/2;
     }
     return self;
 }
@@ -30,13 +32,14 @@
             CGContextSetRGBStrokeColor(context, 0.988, 0.361, 0.388, 1);//线条颜色
             CGContextSetRGBFillColor(context, 0.988, 0.361, 0.388, 1);
         }
-        CGRect frame = CGRectMake(bounds.size.width/2-bounds.size.width/8+1, bounds.size.height/2-bounds.size.height/8, bounds.size.width/4, bounds.size.height/4);
+        CGFloat roundRadius = bounds.size.width/8;
+        CGRect frame = CGRectMake(bounds.size.width/2-roundRadius, bounds.size.height/2-roundRadius, roundRadius*2, roundRadius*2);
         CGContextAddEllipseInRect(context,frame);
         CGContextFillPath(context);
     }
-    
-    CGContextSetLineWidth(context,2);
-    CGRect frame = CGRectMake(2, 2, bounds.size.width-3, bounds.size.height-3);
+    CGFloat lineWidth = 2.0;
+    CGContextSetLineWidth(context,lineWidth);
+    CGRect frame = CGRectMake(lineWidth/2, lineWidth/2, bounds.size.width-lineWidth, bounds.size.height-lineWidth);
     CGContextAddEllipseInRect(context,frame);
     CGContextStrokePath(context);
     /*
